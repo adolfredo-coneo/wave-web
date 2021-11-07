@@ -4,7 +4,7 @@ import './App.css';
 
 function App() {
   const wave = () => {
-    console.log('Keep on rocking in the fre world!', ethers.Signer.isSigner.name);
+    console.log('Keep on rocking in the free world!', ethers.Signer.isSigner.name);
   };
 
   return (
