@@ -4,7 +4,10 @@ import './App.css';
 
 function App() {
   const wave = () => {
-    console.log('Keep on rocking in the free world!', ethers.Signer.isSigner.name);
+    console.log(
+      'Keep on rocking in the free world!',
+      ethers.Signer.isSigner.name
+    );
   };
 
   return (
@@ -13,8 +16,9 @@ function App() {
         <div className="header">🤘 Rocking Here! 🤘</div>
 
         <div className="bio">
-          I am farza and I worked on self-driving cars so that's pretty cool
-          right? Connect your Ethereum wallet and wave at me!
+          Hello there, I'm Adolfredo, and I'm a passionate Software Developer
+          who loves technology and great music!!! Connect your Ethereum wallet
+          and Rock at me!
         </div>
 
         <button className="waveButton" onClick={wave}>
