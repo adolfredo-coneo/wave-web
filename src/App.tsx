@@ -1,24 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
+import { ethers } from 'ethers';
 import './App.css';
 
 function App() {
+  const wave = () => {
+    console.log('Keep on rocking in the fre world!', ethers.Signer.isSigner.name);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="dataContainer">
+        <div className="header">🤘 Rocking Here! 🤘</div>
+
+        <div className="bio">
+          I am farza and I worked on self-driving cars so that's pretty cool
+          right? Connect your Ethereum wallet and wave at me!
+        </div>
+
+        <button className="waveButton" onClick={wave}>
+          Rock at Me
+        </button>
+      </div>
     </div>
   );
 }

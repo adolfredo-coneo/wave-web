@@ -1,0 +1,15 @@
+yarn create react-app wave-web --template typescript
+
+//ethers
+yarn add ethers
+
+//remove web-vitals
+yarn remove web-vitals
+
+//git
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/adolfredo-coneo/wave-web.git
+git push -u origin main
