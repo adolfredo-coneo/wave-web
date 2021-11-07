@@ -6,6 +6,10 @@ yarn add ethers
 //remove web-vitals
 yarn remove web-vitals
 
+//material-ui
+yarn add @mui/material @emotion/react @emotion/styled
+yarn add @mui/lab
+
 //git
 git init
 git add README.md

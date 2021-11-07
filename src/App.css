@@ -28,6 +28,14 @@
   margin-bottom: 30px;
 }
 
+.count {
+  text-align: center;
+  color: rgb(252, 49, 49);
+  font-size: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
 .waveButton {
   cursor: pointer;
   margin-top: 16px;
@@ -46,4 +54,8 @@
 
 .waveButton:active {
   color: rgb(252, 49, 49);
+}
+
+.waveButton.MuiLoadingButton-loading {
+  background-color: rgb(197, 190, 190) !important;
 }
