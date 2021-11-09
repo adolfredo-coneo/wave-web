@@ -1,9 +1,9 @@
 import { ethers } from 'ethers';
 
 import abiObject from './WavePortal.json';
-import { Response, ResponseArray } from '../types';
+import { Response, ResponseArray, Wave } from '../types';
 
-const contractAddress = '0xD3ecC8fbadaE994529b3157800e54b990Adc8d79';
+const contractAddress = '0x518c8e193Ef7ACfcaBDa45EED69dC763143c0dC9';
 const contractABI = abiObject.abi;
 
 const getWaveContract = (
@@ -35,7 +35,7 @@ export const totalWaves = async (): Promise<Response> => {
   }
 };
 
-export const wave = async (): Promise<Response> => {
+export const wave = async (message: string): Promise<Response> => {
   try {
     const { ethereum }: any = window;
     if (!ethereum)
@@ -43,7 +43,7 @@ export const wave = async (): Promise<Response> => {
 
     const wavePortalContract = getWaveContract(ethereum);
 
-    const waveTxn = await wavePortalContract.wave();
+    const waveTxn = await wavePortalContract.wave(message);
     console.log('Mining...', waveTxn.hash);
 
     await waveTxn.wait();
@@ -69,8 +69,18 @@ export const waversList = async (): Promise<ResponseArray> => {
 
     const wavePortalContract = getWaveContract(ethereum);
 
-    const wavers = await wavePortalContract.getWavers();
-    return { status: true, result: wavers };
+    const wavers = await wavePortalContract.getAllWaves();
+    let waves: Wave[] = [];
+    wavers.forEach(
+      (wave: { waver: string; message: string; timestamp: number }) => {
+        waves.push({
+          address: wave.waver,
+          message: wave.message,
+          timestamp: new Date(wave.timestamp * 1000),
+        });
+      }
+    );
+    return { status: true, result: waves };
   } catch (e) {
     console.log(e);
     return { status: false, message: 'Something went wrong', result: [] };

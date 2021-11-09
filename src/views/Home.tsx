@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import LoadingButton from '@mui/lab/LoadingButton';
 
 import {
   checkIfWalletIsConnected,
@@ -8,15 +7,16 @@ import {
 import { wave } from '../ethereum/waveContractHandler';
 import WaveCount from '../components/WaveCount';
 import WaversList from '../components/WaversList';
+import WaveForm from '../components/WaveForm';
 
 const Home = () => {
   const [currentAccount, setCurrentAccount] = useState<string | null>(null);
   const [waveCount, setWaveCount] = useState('0');
   const [loading, setLoading] = useState(false);
 
-  const waveHandler = async () => {
+  const waveHandler = async (message: string) => {
     setLoading(true);
-    const response = await wave();
+    const response = await wave(message);
     if (response.status) {
       console.log('Retrieved total wave count...', response.result);
       setWaveCount(response.result.toString());
@@ -65,20 +65,12 @@ const Home = () => {
           <WaveCount waveCount={waveCount} />
         </div>
 
-        <LoadingButton
+        <WaveForm
+          currentAccount={currentAccount}
           loading={loading}
-          variant="contained"
-          onClick={waveHandler}
-          className="waveButton"
-        >
-          Rock at Me! 🤘
-        </LoadingButton>
-
-        {!currentAccount && (
-          <button className="waveButton" onClick={connectHandler}>
-            Connect your wallet to Rock at me!
-          </button>
-        )}
+          waveHandler={waveHandler}
+          connectHandler={connectHandler}
+        />
 
         <WaversList waveCount={waveCount} />
       </div>
