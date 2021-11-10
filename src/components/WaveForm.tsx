@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import LoadingButton from '@mui/lab/LoadingButton';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 interface Props {
   currentAccount: string | null;
   loading: boolean;
+  resetForm: boolean;
   connectHandler: () => void;
   waveHandler: (message: string) => void;
 }
@@ -13,10 +14,17 @@ interface Props {
 const WaveForm: React.FC<Props> = ({
   currentAccount,
   loading,
+  resetForm,
   connectHandler,
   waveHandler,
 }) => {
   const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    if (resetForm) {
+      setMessage('');
+    }
+  }, [resetForm]);
 
   return (
     <Box

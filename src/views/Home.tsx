@@ -13,13 +13,16 @@ const Home = () => {
   const [currentAccount, setCurrentAccount] = useState<string | null>(null);
   const [waveCount, setWaveCount] = useState('0');
   const [loading, setLoading] = useState(false);
+  const [resetForm, setResetForm] = useState(false);
 
   const waveHandler = async (message: string) => {
     setLoading(true);
+    setResetForm(false);
     const response = await wave(message);
     if (response.status) {
       console.log('Retrieved total wave count...', response.result);
       setWaveCount(response.result.toString());
+      setResetForm(true);
     } else {
       console.log(response.result);
     }
@@ -68,6 +71,7 @@ const Home = () => {
         <WaveForm
           currentAccount={currentAccount}
           loading={loading}
+          resetForm={resetForm}
           waveHandler={waveHandler}
           connectHandler={connectHandler}
         />
