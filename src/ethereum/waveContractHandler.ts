@@ -3,10 +3,10 @@ import { ethers } from 'ethers';
 import abiObject from './WavePortal.json';
 import { Response, ResponseArray, Wave } from '../types';
 
-const contractAddress = '0xA60A704a8F93210da0fF7a77559FED0A35A8186c';
+const contractAddress = '0x310Fb052f8A30e42244Ab488aD3DceBf4272119a';
 const contractABI = abiObject.abi;
 
-const getWaveContract = (
+export const getWaveContract = (
   ethereum:
     | ethers.providers.ExternalProvider
     | ethers.providers.JsonRpcFetchFunc
@@ -43,7 +43,7 @@ export const wave = async (message: string): Promise<Response> => {
 
     const wavePortalContract = getWaveContract(ethereum);
 
-    const waveTxn = await wavePortalContract.wave(message);
+    const waveTxn = await wavePortalContract.wave(message, { gasLimit: 300000 });
     console.log('Mining...', waveTxn.hash);
 
     await waveTxn.wait();

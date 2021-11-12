@@ -28,14 +28,12 @@ const WaveForm: React.FC<Props> = ({
 
   return (
     <Box
-      component="form"
+      component="div"
       display="grid"
       sx={{
         p: 3,
         backgroundColor: 'white',
       }}
-      noValidate
-      autoComplete="off"
       gap={2}
     >
       <Box gridColumn="span 8">

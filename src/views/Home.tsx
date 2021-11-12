@@ -4,10 +4,11 @@ import {
   checkIfWalletIsConnected,
   connectWallet,
 } from '../ethereum/walletHandler';
-import { wave } from '../ethereum/waveContractHandler';
+import { wave, getWaveContract } from '../ethereum/waveContractHandler';
 import WaveCount from '../components/WaveCount';
 import WaversList from '../components/WaversList';
 import WaveForm from '../components/WaveForm';
+import { Contract } from '@ethersproject/contracts';
 
 const Home = () => {
   const [currentAccount, setCurrentAccount] = useState<string | null>(null);
@@ -30,7 +31,9 @@ const Home = () => {
   };
 
   const connectHandler = async () => {
+    console.log('Starting');
     const response = await connectWallet();
+    console.log('Result:', response.status);
     if (response.status) {
       setCurrentAccount(response.result);
       console.log('Connected', response.result);
@@ -51,6 +54,26 @@ const Home = () => {
     };
 
     checkWallet();
+
+    const onNewWave = (from: string, timestamp: Date, message: string) => {
+      console.log('NewWave', from, timestamp, message)
+      setWaveCount(current => current + 1);
+    }
+
+    const { ethereum }: any = window;
+    let wavePortalContract: Contract;
+    if (ethereum){
+      console.log('receiving new waves')
+      wavePortalContract = getWaveContract(ethereum);
+      wavePortalContract.on('NewWave', onNewWave);
+    }
+
+    return () => {
+      if (wavePortalContract) {
+        console.log('not receiving new waves')
+        wavePortalContract.off('NewWave', onNewWave);
+      }
+    };
   }, []);
 
   return (
