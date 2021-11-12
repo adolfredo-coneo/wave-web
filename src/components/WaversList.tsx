@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -12,11 +12,11 @@ import { Typography } from '@mui/material';
 import { Wave } from '../types';
 
 interface Props {
-  waveCount: string;
+  waveCount: number;
 }
 
 const WaversList: React.FC<Props> = ({ waveCount }) => {
-  const [list, setList] = React.useState<Wave[]>([]);
+  const [list, setList] = useState<Wave[]>([]);
 
   useEffect(() => {
     const getWaves = async () => {

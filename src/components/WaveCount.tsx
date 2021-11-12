@@ -1,18 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { totalWaves } from '../ethereum/waveContractHandler';
 
 interface Props {
-  waveCount: string;
+  waveCount: number;
 }
 
 const WaveCount: React.FC<Props> = ({ waveCount }) => {
-  const [count, setCount] = React.useState(waveCount);
+  const [count, setCount] = useState(waveCount);
 
   useEffect(() => {
     const getWaves = async () => {
       const total = await totalWaves();
-      if (total.status) setCount(total.result);
+      if (total.status) setCount(parseInt(total.result));
     };
     getWaves();
   }, []);

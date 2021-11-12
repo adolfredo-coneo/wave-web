@@ -12,7 +12,7 @@ import { Contract } from '@ethersproject/contracts';
 
 const Home = () => {
   const [currentAccount, setCurrentAccount] = useState<string | null>(null);
-  const [waveCount, setWaveCount] = useState('0');
+  const [waveCount, setWaveCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [resetForm, setResetForm] = useState(false);
 
@@ -22,7 +22,7 @@ const Home = () => {
     const response = await wave(message);
     if (response.status) {
       console.log('Retrieved total wave count...', response.result);
-      setWaveCount(response.result.toString());
+      setWaveCount(parseInt(response.result));
       setResetForm(true);
     } else {
       console.log(response.result);

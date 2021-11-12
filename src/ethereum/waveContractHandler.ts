@@ -3,7 +3,7 @@ import { ethers } from 'ethers';
 import abiObject from './WavePortal.json';
 import { Response, ResponseArray, Wave } from '../types';
 
-const contractAddress = '0x310Fb052f8A30e42244Ab488aD3DceBf4272119a';
+const contractAddress = '0x6649Aaa2560F1178df1fc9E90D37A3b281ae14a8';
 const contractABI = abiObject.abi;
 
 export const getWaveContract = (
