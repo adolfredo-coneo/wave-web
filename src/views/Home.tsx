@@ -56,7 +56,7 @@ const Home = () => {
     checkWallet();
 
     const onNewWave = (from: string, timestamp: Date, message: string) => {
-      console.log('NewWave', from, timestamp, message)
+      console.log('NewWave', from, timestamp, message);
       setWaveCount(current => current + 1);
     }
 

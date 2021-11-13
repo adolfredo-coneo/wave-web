@@ -12,14 +12,15 @@ const WaveCount: React.FC<Props> = ({ waveCount }) => {
   useEffect(() => {
     const getWaves = async () => {
       const total = await totalWaves();
+      console.log("Total Waves", total);
       if (total.status) setCount(parseInt(total.result));
     };
     getWaves();
-  }, []);
-
-  useEffect(() => {
-    setCount(waveCount);
   }, [waveCount]);
+
+  /*useEffect(() => {
+    setCount(waveCount);
+  }, [waveCount]);*/
 
   return <div>{count} are rocking with me!!! Yeah!!!</div>;
 };
